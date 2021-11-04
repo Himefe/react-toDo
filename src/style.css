@@ -1,0 +1,163 @@
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
+  
+  color: #FFF;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #101010;
+  color: white;
+  margin: 0;
+}
+
+main {
+  min-width: 40%; 
+}
+
+label {
+  display: block;
+}
+
+.area-ul {
+  background: #202020;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 2px #2A2A2A;
+}
+
+.area-ul ul li {
+  padding: 10px 0;
+  border-bottom: 2px solid #343434;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.check-name-area {
+  display: flex;
+}
+
+
+
+.area-ul ul li .check-name-area > span:last-child {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.area-ul ul li[data-checked] .check-name-area > span:last-child:after {
+  content: '';
+  width: 102%;
+  height: 2px;
+  background: #FFF;
+  position: absolute;
+  left: -2px;
+}
+
+.area-ul li .check-name-area > span:first-child {
+  border: 2px solid transparent;
+}
+
+.area-ul li[data-checked] .check-name-area > span:first-child {
+  border: 2px solid #00FF00;
+}
+
+.area-ul ul li span:first-child {
+  width: 25px;
+  height: 25px;
+  background: #343434;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.area-ul ul li[data-checked] span:first-child > span {
+  border: 2px solid #00FF00;
+  border-top: none;
+  border-left: none;
+  width: 10px;
+  height: 15px;
+  transform: rotate(0deg);
+  animation: checked .3s ease-in-out forwards;
+
+  
+}
+
+
+.input-area {
+  margin: 20px 0;
+}
+
+.botao-inserir {
+  padding: 10px 15px;
+  color: #00FF00;
+  background: #2A2A2A;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: filter .2s ease-in-out;
+  cursor: pointer;
+}
+
+.botao-inserir:hover {
+  filter: brightness(1.2);
+  border: 1px solid #00FF00;
+}
+
+.input-area input {
+  padding: 8px 10px;
+  border-radius: 3px;
+  border: none;
+  margin-top: 5px;
+  width: 60%;
+  background: #343434;
+  border: 1px solid transparent;
+  color: white;
+}
+
+.input-area input:focus {
+  border: 1px solid #00FF00;
+  outline: #00FF00;
+}
+
+.excluir {
+  cursor: pointer;
+  transition: color .3s ease-in-out;
+}
+
+.excluir:hover {
+  color: red;
+}
+
+
+@keyframes checked {
+  to {
+    transform: rotate(45deg);
+    margin-bottom: 5px;
+  }
+}
