@@ -55,6 +55,7 @@ label {
   justify-content: space-between;
   align-items: center;
   position: relative;
+  margin-right: 10px;
 }
 
 .check-name-area {
@@ -70,13 +71,8 @@ label {
   margin-left: 15px;
 }
 
-.area-ul ul li[data-checked] .check-name-area > span:last-child:after {
-  content: '';
-  width: 102%;
-  height: 2px;
-  background: #FFF;
-  position: absolute;
-  left: -2px;
+.area-ul ul li[data-checked] .check-name-area > span:last-child {
+  text-decoration: line-through;
 }
 
 .area-ul li .check-name-area > span:first-child {
@@ -97,6 +93,11 @@ label {
   align-items: center;
 }
 
+.area-ul ul {
+  max-height: 190px;
+  overflow-y: scroll;
+}
+
 .area-ul ul li[data-checked] span:first-child > span {
   border: 2px solid #00FF00;
   border-top: none;
@@ -111,7 +112,9 @@ label {
 
 
 .input-area {
-  margin: 20px 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: flex-end;
 }
 
 .botao-inserir {
@@ -122,6 +125,9 @@ label {
   border-radius: 4px;
   transition: filter .2s ease-in-out;
   cursor: pointer;
+  display: block;
+  margin-left: 10px;
+  
 }
 
 .botao-inserir:hover {
@@ -130,11 +136,11 @@ label {
 }
 
 .input-area input {
-  padding: 8px 10px;
+  padding: 10px;
   border-radius: 3px;
   border: none;
   margin-top: 5px;
-  width: 60%;
+  flex: 1;
   background: #343434;
   border: 1px solid transparent;
   color: white;
@@ -154,10 +160,45 @@ label {
   color: red;
 }
 
+::-webkit-scrollbar-track {
+  background-color: #2a2a2a;
+  margin-left: 10px;
+}
+::-webkit-scrollbar {
+  width: 6px;
+  background: #4b4545;
+  
+}
+::-webkit-scrollbar-thumb {
+  background: #343434;
+  border-radius: 4px;
+}
+
 
 @keyframes checked {
   to {
     transform: rotate(45deg);
     margin-bottom: 5px;
+  }
+}
+
+
+
+@media only screen and (max-width: 767px) {
+  main {
+    width: 90%;
+  }
+
+  .botao-inserir {
+    margin-top: 10px;
+    margin-left: 0;
+  }
+
+  .input-area input {
+    width: 100%;
+  }
+
+  .input-area {
+    display: block;
   }
 }

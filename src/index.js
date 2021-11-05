@@ -4,10 +4,10 @@ import ReactDOM from "react-dom";
 import "../src/style.css";
 import Button from "./components/Button";
 
-
 const App = () => {
   const [tarefas, setTarefas] = React.useState([]);
   const [input, setInput] = React.useState("");
+
   // const [clicked, setClicked] = React.useState("");
 
   const inputRef = React.useRef();
@@ -23,7 +23,13 @@ const App = () => {
       alert("Por favor digite alguma tarefa!");
       return null;
     } else {
-      setTarefas([...tarefas, input]);
+      setTarefas([
+        {
+          label: input,
+          id: String(Math.floor(Math.random() * 1000)),
+        },
+        ...tarefas,
+      ]);
       // window.localStorage.setItem("list", [...tarefas, input]);
       // setClicked(true);
       setInput("");
@@ -35,36 +41,23 @@ const App = () => {
   const tasker = ({ currentTarget }) => {
     let elemento = currentTarget.closest("li");
 
-    elemento.hasAttribute("data-checked") ? elemento.removeAttribute("data-checked") : elemento.setAttribute("data-checked", "");
-    
+    elemento.hasAttribute("data-checked")
+      ? elemento.removeAttribute("data-checked")
+      : elemento.setAttribute("data-checked", "");
   };
 
-  const excluirTask = ({currentTarget}) => {
-    tarefas.splice(currentTarget.closest("li").getAttribute("data-id"), 1);
-    setTarefas([...tarefas]);
-  }
+  const excluirTask = ({ currentTarget }) => {
+    let id = currentTarget.closest("li").getAttribute("data-id");
+    let index = tarefas.findIndex((i) => i.id === id);
 
+    tarefas.splice(index, 1);
+    setTarefas([...tarefas]);
+  };
 
   return (
     <main>
       <h2>Tarefas</h2>
       <div className="area-ul">
-        {tarefas.length < 1 && <span>Nenhuma tarefa inserida!</span>}
-        <ul>
-          {tarefas.map((comentario, index) => (
-            <li key={index} data-id={index}>
-              <div className="check-name-area">
-                <span className="check-area" onClick={tasker}>
-                  <span></span>
-                </span>
-                <span>{comentario}</span>
-              </div>
-              <span className="excluir" onClick={excluirTask}>
-                X
-              </span>
-            </li>
-          ))}
-        </ul>
         <div className="input-area">
           <input
             type="text"
@@ -77,8 +70,24 @@ const App = () => {
             }
             placeholder="Digite a sua tarefa"
           />
+          <Button onClick={handleClick} texto="Inserir nova tarefa" />
         </div>
-        <Button onClick={handleClick} texto="Inserir nova tarefa" />
+        {tarefas.length < 1 && <span>Nenhuma tarefa inserida!</span>}
+        <ul>
+          {tarefas.map((tarefa) => (
+            <li key={tarefa.id} data-id={tarefa.id}>
+              <div className="check-name-area">
+                <span className="check-area" onClick={tasker}>
+                  <span></span>
+                </span>
+                <span>{tarefa.label}</span>
+              </div>
+              <span className="excluir" onClick={excluirTask}>
+                X
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </main>
   );
