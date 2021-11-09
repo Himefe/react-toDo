@@ -7,10 +7,16 @@ import Button from "./components/Button";
 const App = () => {
   const [tarefas, setTarefas] = React.useState([]);
   const [input, setInput] = React.useState("");
+  const [alerta, setAlerta] = React.useState(false);
+
 
   // const [clicked, setClicked] = React.useState("");
 
   const inputRef = React.useRef();
+
+  const alertaRef = React.useRef();
+
+  const timeOutRef = React.useRef();
 
   // React.useEffect(() => {
   //   if (window.localStorage.getItem("list") !== null) {
@@ -18,9 +24,27 @@ const App = () => {
   //   }
   // }, [clicked]);
 
+  React.useEffect(() => {
+    if (alerta) alertaRef.current.setAttribute("show", "");
+  }, [alerta])
+
+  const showAlert = () => {
+    setAlerta(true);
+    
+    clearTimeout(timeOutRef.current);
+
+    timeOutRef.current = setTimeout(() => {
+      setAlerta(false);
+    }, 2000);
+    
+
+    return null
+  }
+
   const handleClick = async (event) => {
     if (input === "" || input === " ") {
-      alert("Por favor digite alguma tarefa!");
+      showAlert();
+      
       return null;
     } else {
       setTarefas([
@@ -56,6 +80,11 @@ const App = () => {
 
   return (
     <main>
+      {alerta && (
+        <div className="alerta" ref={alertaRef}>
+          <span>Por favor digite alguma tarefa!</span>
+        </div>
+      )}
       <h2>Tarefas</h2>
       <div className="area-ul">
         <div className="input-area">

@@ -167,6 +167,23 @@ label {
   color: red;
 }
 
+.alerta {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -100%);
+  transition: all .3s ease-in-out;
+  padding: 20px 40px;
+  background-color: #343434;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.alerta[show] {
+  animation: alert .3s ease-in-out forwards;
+}
+
 ::-webkit-scrollbar-track {
   background-color: #2a2a2a;
   margin-left: 10px;
@@ -189,6 +206,16 @@ label {
   }
 }
 
+@keyframes alert { 
+  
+  from {
+    transform: translate(-50%, -100%);
+  }
+  to {
+    transform: translate(-50%, 15%);
+  }
+}
+
 
 
 @media only screen and (max-width: 767px) {
@@ -208,5 +235,9 @@ label {
 
   .input-area {
     display: block;
+  }
+
+  .alerta {
+    width: 80%;
   }
 }
